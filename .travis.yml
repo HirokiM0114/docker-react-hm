@@ -10,8 +10,18 @@ before_install:
 script:
   - docker run -e CI=true hirokim0114/docker_react_hm npm run test
 
-#before_install:
-#  - docker build -t changgyunkim/docker-react -f Dockerfile.dev .
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react-hm"
+  env: "DockerReactHm-env"
+  bucket_name: "elasticbeanstalk-us-east-2-319947790842"
+  bucket_path: "docker-react-hm"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
 
-#script:
-#  - docker run -e CI=true changgyunkim/docker-react npm run test
+  #自分のサイトURLイメージ/App名/環境名
+  #AWS_ACCESS_KEYとAWS_SECRET_KEYはAWSへアクセスするTravisに環境変数を追加しておく
+  #DockerReactHm-env.eba-ms3bvjgi.us-east-2.elasticbeanstalk.com/docker-react-hm/DockerReactHm-env
