@@ -5,7 +5,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t hirokim0114/docker_react_hm -f Dockerfile .
+  - docker build -t hirokim0114/docker_react_hm -f Dockerfile.dev .
 
 script:
   - docker run -e CI=true hirokim0114/docker_react_hm npm run test
